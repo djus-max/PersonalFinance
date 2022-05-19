@@ -1,0 +1,77 @@
+#:kivy 2.0.0
+
+<ArticleBoxDetail>:
+    adaptive_height: True
+    padding: 0
+    spacing: 0
+    elevation: 18
+    # on_release: root.general_press()
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: GeneralColor.white  
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [(20.0, 20.0), (20.0, 20.0), (20.0, 20.0), (20.0, 20.0)]
+
+
+<ArticleBoxGroup>:
+    adaptive_height: True
+    padding: 0
+    spacing: 0
+    orientation: 'horizontal'
+    LabelIconButton:
+        id: label_button
+        # icon: 'plus-thick' 
+        # disabled : True
+        on_release: root.button_press()
+    ArticleBoxDetailButton:
+        adaptive_height: True
+        padding: 3
+        spacing: 0
+        orientation: 'horizontal'
+        on_release: root.general_press()
+        LabelIconButton:
+            id: first_label
+        LabelDetail:
+            id: second_label
+        LabelDetail:
+            id: third_label
+            text_color: GeneralColor.dark_grey
+        LabelDetail:
+            id: fourth_label
+
+
+<ArticleBoxGroupDetail>:
+    adaptive_height: True
+    padding: 0
+    spacing: 0
+    orientation: 'horizontal'
+    LabelIconButton:
+        id: label_button
+        icon: '' 
+        user_font_size: "18sp"
+        # disabled : True
+        # on_release: root.button_press()
+    # LabelIconButton:
+        # id: label_button_2
+        # icon: '' 
+        # user_font_size: "10sp"
+        # disabled : True
+        # on_release: root.button_press()
+    ArticleBoxDetailButton:
+        adaptive_height: True
+        padding: 3
+        spacing: 0
+        orientation: 'horizontal'
+        on_release: root.general_press()
+        LabelIconButton:
+            id: first_label
+        LabelDetail:
+            id: second_label
+        LabelDetail:
+            id: third_label
+            text_color: GeneralColor.dark_grey
+        LabelDetail:
+            id: fourth_label

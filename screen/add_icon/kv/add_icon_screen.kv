@@ -1,0 +1,55 @@
+#:kivy 2.0.0
+
+<AddIconScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: (None, None)
+        size_hint: 1, 1
+        HeaderAddIcon:
+            id: header
+        CentrWidgetAll:
+            id: centr_widget
+            #size_hint: (None, None)
+            size_hint: 1, 0.85
+            padding: 20, 10, 0, 10
+            orientation: 'vertical'
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1) 
+                RoundedRectangle:
+                    pos: (self.pos[0] + 10, self.pos[1])
+                    size: (self.size[0] - 20, self.size[1])
+                    radius: [(30.0, 30.0), (30.0, 30.0), (0.0, 0.0), (0.0, 0.0)]
+            MDBoxLayout:
+                size_hint_y: None
+                height: 40
+                padding: 0, 0, 30, 0
+                canvas.before:
+                    Color:
+                        rgba: GeneralColor.dark_grey               
+                    RoundedRectangle:
+                        pos: (self.pos[0] + 10, self.pos[1])
+                        size: (self.size[0] - 40, 1)
+                AnchorLayout:
+                    anchor_x: 'right'
+                    pos_hint: {'center_y': .6}
+                    MDFillRoundFlatButton:
+                        id: button_transition
+                        text: 'создать'
+                        theme_text_color: "Custom"
+                        md_bg_color: GeneralColor.header_color
+                        #on_release: root.query_insert_article() 
+            ScrollView:
+                pos_hint: {"center_x": .5, "center_y": .5}
+                effect_cls: 'ScrollEffect' 
+                MDBoxLayout:
+                    id: box
+                    orientation: 'vertical'
+                    adaptive_height: True
+                    padding: 0, 10, 0, 0
+                    BoxForIconAddScreen:
+                        id: box_for_icon
+                        root_screen: root
+                        adaptive_height: True
+                        orientation: 'lr-tb'
+                        spacing: 15

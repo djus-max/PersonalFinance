@@ -1,0 +1,120 @@
+#:kivy 2.0.0
+
+<AddTransferScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: (None, None)
+        size_hint: 1, 1
+        HeaderAddTransfer:
+            id: header
+        CentrWidgetAll:
+            id: centr_widget
+            size_hint: 1, 0.9
+            padding: 20, 10, 0, 10
+            MDBoxLayout:
+                id: box
+                orientation: 'vertical'
+                spacing: 5
+                padding: 0, 0, 0, 0
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 60
+                    padding: 15, 0, 15, 0
+                    MDBoxLayout:
+                        MDLabel:
+                            id: label_summa
+                            text: "[u]Введите сумму[/u]"
+                            markup: True
+                            halign: 'left'
+                            pos_hint: { 'center_y': .5}
+                            theme_text_color: "Custom"
+                            text_color: GeneralColor.text_color_global
+                    MDBoxLayout:
+                        adaptive_height: True
+                        size_hint_x: None
+                        width: "200sp"
+                        TextInputSumma:
+                            id: text_field_summa
+                            helper_text: "Заполните поле"
+                            required: True
+                            on_focus: self.recording_summa(self, root)
+                            on_text: self.text_validate_summa(self, self.text)
+                        MDLabel:
+                            id: text_sign_money
+                            text: ''
+                            color: GeneralColor.text_color_global
+                MDBoxLayout:
+                    adaptive_height: True
+                    padding: 10, 20 ,0,0
+                    spasing: 10
+                    orientation: 'horizontal'
+                    BoxChoiceForAccountOutTransfer:
+                        id: box_choice_for_out_account
+                        text_sign_money: text_sign_money
+                    MDIcon:
+                        icon: "arrow-right"
+                        text_color: GeneralColor.bright_red
+                        pos_hint: {"center_x":.1,"center_y":0.5}
+                        theme_text_color: 'Custom'
+                        font_size: '25dp'
+                    BoxChoiceForAccountInTransfer:
+                        id: box_choice_for_in_account
+                        text_sign_money: text_sign_money
+                MDBoxLayout:
+                    adaptive_height: True
+                    padding: 10, 5, 0, 10
+                    TextInputComent:
+                        id: text_field_comment
+                        max_text_length: 100
+                        on_focus: self.recording_comment(self, root)
+                        on_text: self.text_validate_comment(self, self.text, self.max_text_length)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    adaptive_height: True
+                    spacing: 20
+                    MagicLabel:
+                        id: label_text_data
+                        adaptive_height: True
+                        text: 'Выберите дату:'
+                        font_size: '15sp'
+                        padding: 10, 0
+                    BoxForDataTransfer:
+                        id: box_for_data
+                        root_screen: root
+                        cols: 4
+                        size_hint_y: None
+                        height: 60
+                        spacing: 5
+                        padding: 0,0,20,0
+                RelativeLayout:
+                    MDBoxLayout:
+                        id: box_change
+                        AnchorLayout:
+                            anchor_x: 'center'
+                            anchor_y: 'bottom'
+                            MDFillRoundFlatButton:
+                                id: button_delete
+                                text: 'УДАЛИТЬ'
+                                theme_text_color: "Custom"
+                                md_bg_color: GeneralColor.bright_red
+                                on_release: root.query_delete_transfer() 
+                        AnchorLayout:
+                            anchor_x: 'center'
+                            anchor_y: 'bottom'
+                            MDFillRoundFlatButton:
+                                id: button_change
+                                text: 'ИЗМЕНИТЬ'
+                                theme_text_color: "Custom"
+                                md_bg_color: GeneralColor.header_color
+                                on_release: root.query_update_transfer() 
+                    AnchorLayout:
+                        id: box_save
+                        anchor_x: 'center'
+                        anchor_y: 'bottom'
+                        MDFillRoundFlatButton:
+                            id: button_save
+                            text: 'СОХРАНИТЬ'
+                            theme_text_color: "Custom"
+                            md_bg_color: GeneralColor.header_color
+                            on_release: root.query_insert_transfer() 

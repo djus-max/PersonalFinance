@@ -1,0 +1,77 @@
+#:kivy 2.0.0
+
+<DetailArticle>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: (None, None)
+        size_hint: 1, 1
+        HeaderDetailArticle:
+            id: header
+        CentrWidgetAll:
+            id: centr_widget
+            size_hint: 1, 0.9
+            padding: 20, 10, 20, 10
+            orientation: 'vertical'
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.1
+                padding: 0, 10, 0, 0
+                spacing: 5
+                BoxChoiceAccountDetail:
+                    size_hint: 1, 1
+                    spacing: 5
+                    on_press: self.show_dialog_choice_account()
+                    canvas.before:
+                        Color:
+                            rgba: 1, 0, 0, .5
+                        Rectangle:    
+                            size: self.size
+                            pos: self.pos
+                    MDBoxLayout:
+                        size_hint_x: None
+                        width: 110
+                        MDLabel:
+                            size_hint_x: None
+                            width: 80
+                            text: ''
+                            rows: 1
+                            color: GeneralColor.dark_grey 
+                            shorten: True
+                            shorten_from: 'right'
+                            font_size: '15sp'
+                        MDIcon:
+                            id: icon_account
+                            halign: "right"
+                            icon:  'arrow-down-drop-circle' 
+                            theme_text_color: "Custom"
+                            text_color: 0,0,0,1
+                AnchorLayout:
+                    anchor_x: 'right'
+                    size_hint_x: None
+                    MDDropDownItem:
+                        id: drop_item
+                        pos_hint: {'center_x': 1, 'center_y': .5}
+                        text: 'по дате'
+                        on_release: root.menu.open()
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 0, .5
+                            Rectangle:    
+                                size: self.size
+                                pos: self.pos
+            ScrollView:
+                id: scroll_box
+                bar_color: 0,0,0,0
+                pos_hint: {"center_x": .5, "center_y": .5}
+                MDBoxLayout:
+                    id: box
+                    orientation: 'vertical'
+                    adaptive_height: True
+                    spacing: 5
+                    padding: 0, 5, 0, 0
+                    canvas.before:
+                        Color:
+                            rgba: 1, 0, 1, .5
+                        Rectangle:    
+                            size: self.size
+                            pos: self.pos

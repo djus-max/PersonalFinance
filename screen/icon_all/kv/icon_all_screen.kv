@@ -1,0 +1,75 @@
+#:kivy 2.0.0
+
+<IconAllScreen>:
+    canvas.before:
+        Color:
+            rgba: hex('#9c9292aa')          
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: (None, None)
+            size_hint: 0.9, 0.9
+            canvas.before:
+                Color:
+                    rgba: GeneralColor.white          
+                RoundedRectangle:
+                    pos: (self.pos[0] , self.pos[1])
+                    size: (self.size[0] , self.size[1])
+                    radius: [(30.0, 30.0), (30.0, 30.0), (30.0, 30.0), (30.0, 30.0)]
+            HeaderAllIcon:
+                id: header
+                root_screen: root
+                canvas.before:
+                    Color:
+                        rgba: GeneralColor.header_color
+                    RoundedRectangle:
+                        pos: (self.pos[0]  , self.pos[1] - 25)
+                        size: (self.size[0] , self.size[1] + 25)
+                        radius: [(30.0, 30.0), (30.0, 30.0), (30.0, 30.0), (30.0, 30.0)]
+            CentrWidgetAll:
+                id: centr_box
+                size_hint: 1, 0.9
+                orientation: 'vertical'
+                padding: 20, 40, 10, 10
+                canvas.before:
+                    Color:
+                        rgba: (GeneralColor.white) 
+                    RoundedRectangle:
+                        pos: (self.pos[0] + 10, self.pos[1])
+                        size: (self.size[0] - 20, self.size[1])
+                        radius: [(30.0, 30.0), (30.0, 30.0), (30.0, 30.0), (30.0, 30.0)]
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: 60
+                    padding: 15, 0, 15, 0
+                    size_hint_x: None
+                    width: 200
+                    TextInputCategory:
+                        id: text_category
+                        hint_text: 'название категории'
+                        max_text_length: 30
+                        on_focus: self.recording_category(self, root)
+                        on_text: self.text_validate(self, self.text, self.max_text_length)
+                BoxCategoryIconAll:
+                    main_screen: root
+                    id: box_category
+                    root_screen: root
+                    rows: 2
+                    adaptive_height: True
+                MDBoxLayout:
+                    size_hint: 1, 0.1
+                    size_hint_x: None
+                    pos_hint: {"center_x": 0.5, "center_y": 1}
+                    padding: 0, 0, 0, 20
+                    MDFillRoundFlatButton:
+                        id: button_add_article
+                        text: 'ДОБАВИТЬ'
+                        theme_text_color: "Custom"
+                        md_bg_color: GeneralColor.header_color
+                        on_release: root.query_insert_icon()
+                        text_color: GeneralColor.text_color_global

@@ -1,0 +1,134 @@
+#:kivy 2.0.0
+
+<AllAccountScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: (None, None)
+        size_hint: 1, 1
+        HeaderAllAccount:
+            id: header
+        TabsBox:
+            elevation: 36
+            MDTabs:
+                id: tabs
+                on_tab_switch: EventControl.all_account_screen.on_tab_switch(*args)
+                background_color: 1, 0, 0, 0
+                tab_hint_x: True
+                text_color_normal: GeneralColor.grey
+                text_color_active: GeneralColor.black
+                default_tab: 4
+                padding: 20, 0, 20, 0
+                indicator_color: GeneralColor.black
+                tab_indicator_type: "line"
+                canvas.before:
+                    Color:
+                        rgba: (GeneralColor.white) 
+                    RoundedRectangle:
+                        pos: (self.pos[0] + 10, self.pos[1])
+                        size: (self.size[0] - 20, self.size[1])
+                        radius: [(30.0, 30.0), (30.0, 30.0), (0.0, 0.0), (0.0, 0.0)]
+                TabAccount:
+                    id: tabAccount
+                    title: "Все счета"
+                    title_color: 0,1,1,1
+                TabTransfer:
+                    id: tabTransfer
+                    title: "Переводы"
+
+
+<TabsBox@MDBoxLayout+FakeRectangularElevationBehavior>:
+
+
+<Tab>:
+    Centr:
+        BoxTittle:
+            id: boxTitle
+        ScrollView:
+            id: scroll_box          
+
+
+<TabAccount@Tab>:
+    Centr:
+        BoxTittle:
+            MDBoxLayout:
+                padding: 20, 0, 0, 5
+                MDLabel:
+                    id: label_tittle
+                    text: "Все счета"
+                    halign: 'left'
+                    pos_hint: { 'center_y': .3}
+            AnchorLayout:
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                ButtonAllAccount:
+                    id: button
+                    text: 'создать счет'
+                    on_release: root.query_insert_article() 
+        ScrollView:
+            id: scroll_box   
+            effect_cls: 'ScrollEffect'       
+            AccountBox:
+                id: article_box
+                adaptive_height: True
+                spacing: 5
+                padding: 0, 0, 0, 0
+                orientation: 'vertical'
+
+
+<TabTransfer@Tab>:
+    Centr:
+        BoxTittle:
+            MDBoxLayout:
+                padding: 20, 0, 0, 5
+                MDLabel:
+                    id: label_tittle
+                    text: "Все переводы"
+                    halign: 'left'
+                    pos_hint: { 'center_y': .3}
+            AnchorLayout:
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                ButtonAllAccount:
+                    id: button
+                    text: 'создать перевод'
+                    on_release: app.manager.new_screen_transition( EventControl.add_transfer_screen, 'AddTransferScreen', 'default') 
+        ScrollView:
+            id: scroll_box 
+            effect_cls: 'ScrollEffect'         
+            TransferBox:
+                id: article_box
+                adaptive_height: True
+                spacing: 5
+                padding: 0, 0, 0, 0
+                orientation: 'vertical'
+
+
+<Centr@MDBoxLayout+FakeRectangularElevationBehavior>:
+    orientation: 'vertical'
+    elevation: 36
+    canvas.before:
+        Color:
+            rgba: (GeneralColor.white) 
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<BoxTittle@MDBoxLayout>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 50
+    canvas.after:
+        Color:
+            rgba: 0,0,0,0.5
+        RoundedRectangle:
+            pos: (self.pos[0] + 20, self.pos[1] + 2)
+            size: (self.size[0] - 40, 1)
+
+
+<ButtonAllAccount@MDFillRoundFlatButton>:
+    id: button
+    text: ''
+    font_size: "13sp"
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    theme_text_color: "Custom"
+    text_color: GeneralColor.black
+    md_bg_color: hex('#33b300')

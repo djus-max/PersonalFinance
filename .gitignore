@@ -1,0 +1,16 @@
+.*
+
+# service file
+!.gitignore
+__pycache__/
+_time*/*
+default.code-workspace
+Pipfile.lock
+
+# Work files
+data/logs
+DataBaseOuter.db
+
+
+
+

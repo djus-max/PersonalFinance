@@ -1,0 +1,77 @@
+#:kivy 2.0.0
+
+<AddAccountScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: (None, None)
+        size_hint: 1, 1
+        HeaderAddAccount:
+        CentrWidgetAll:
+            size_hint: 1, 0.9
+            orientation: 'vertical'
+            padding: 20, 20, 10, 0
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1) 
+                RoundedRectangle:
+                    pos: (self.pos[0] + 10, self.pos[1])
+                    size: (self.size[0] - 20, self.size[1])
+                    radius: [(30.0, 30.0), (30.0, 30.0), (0.0, 0.0), (0.0, 0.0)]
+
+            MDBoxLayout:
+                adaptive_height: True
+                padding: 15, 10, 20, 0
+                spacing: 50
+                #pos_hint: {"center_x": .55, "center_y": .5}
+                TextInputSumma:
+                    id: text_field_summa
+                    size_hint_x: None
+                    width: "150sp"
+                    hint_text: 'сумма на счету'
+                    on_focus: self.recording_summa(self, root)
+                    on_text: self.text_validate_summa(self, self.text)
+                BoxCurrency:
+                    text_currency: text_currency
+                    on_release: self.box_choice_currency()
+                    MagicLabel:
+                        id: text_currency
+                        text: 'Выберите\nвалюту'
+                        size_hint: 3, 1
+                    MDIcon:
+                        icon:  'arrow-down-drop-circle'
+                        halign: "right"
+                        valign: 'middle'
+                        theme_text_color: "Custom"
+                        text_color: 0,0,0,1
+            MDBoxLayout:
+                #size_hint: 1, 0.1
+                adaptive_height: True
+                padding: 15, 10, 15, 0
+                size_hint_x: None
+                width: 200
+                TextInputCategory:
+                    id: text_category
+                    hint_text: 'название счета'
+                    max_text_length: 30
+                    on_focus: self.recording_category(self, root)
+                    on_text: self.text_validate(self, self.text, self.max_text_length)
+            BoxChoiceIconAccounnt:
+                main_screen: root
+                #padding: -20, 0, 10, 0
+                id: box_category
+                root_screen: root
+                rows: 2
+                adaptive_height: True
+            MDBoxLayout:
+                size_hint_y: 0.3
+                #adaptive_height: True
+                size_hint_x: None
+                pos_hint: {"center_x": 0.5, "center_y": 1}
+                padding: 0, 0, 0, 20
+                MDFillRoundFlatButton:
+                    id: button_add_article
+                    text: 'ДОБАВИТЬ'
+                    theme_text_color: "Custom"
+                    md_bg_color: GeneralColor.header_color
+                    on_release: root.query_insert_icon()
+                    text_color: GeneralColor.text_color_global

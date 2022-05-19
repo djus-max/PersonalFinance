@@ -1,0 +1,162 @@
+#:kivy 2.0.0
+
+<Header>:
+    cols: 3
+    size_hint: 1, 0.15
+    canvas.before:
+        Color:
+            rgba:  root.color_header_canvas  # (0,1,0,1) 
+        RoundedRectangle:
+            pos: (self.pos[0]  , self.pos[1] - 25)
+            size: (self.size[0] , self.size[1] + 25)
+            radius: [(0.0, 0.0), (0.0, 0.0), (30.0, 30.0), (30.0, 30.0)]
+
+
+<HeaderMain@Header>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.2, 1
+        MDIconButton:
+            icon: "menu"
+            user_font_size: "32sp"
+            pos_hint: {'center_x': .4, 'center_y': .7}
+            on_press: EventControl.navigationBar.on_start()
+        MDBoxLayout:
+    MDBoxLayout:
+        size_hint: 0.6, 1
+        orientation: 'vertical'
+        pos_hint_x: None, None
+        BoxChoiceAccountMain:
+
+        HeaderBoxChoiceCategory:
+    MDBoxLayout:
+        size_hint: 0.2, 1
+
+
+<BoxChoiceAccountMain>:
+    size_hint_x: None
+    width: 150
+    orientation: 'horizontal'
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    padding: 0, 10, 0, 0
+    on_press: self.show_dialog_choice_account()
+    MDBoxLayout:
+        size_hint: 0.7, 1
+        orientation: 'vertical'
+        adaptive_wight: True
+        MDBoxLayout:
+            MDLabel:
+                id: label_text_account
+                text: ''
+                halign: 'center'
+                valign: 'center'
+                rows: 1
+                color: GeneralColor.bright_red
+                shorten: True
+                shorten_from: 'right'
+                font_size: '18sp'
+        MDBoxLayout:
+            padding: 0, 10, 0, 0
+            MDLabel:
+                id: label_text_total
+                text: ''
+                halign: 'center'
+                valign: 'center'
+                rows: 1
+                color: GeneralColor.dark_grey 
+                shorten: True
+                shorten_from: 'center'
+                font_size: '15sp'
+    MDBoxLayout:
+        size_hint: 0.2 , 1
+        padding: 10, 0, 0, 0
+        MDIcon:
+            id: icon_account
+            halign: "right"
+            icon:  'arrow-down-drop-circle' 
+            theme_text_color: "Custom"
+            text_color: 0,0,0,1
+
+
+<HeaderAllAccount>:
+    size_hint: 1, 0.1
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.3, 1
+        MDIconButton:
+            icon: "menu"
+            user_font_size: "32sp"
+            pos_hint: {'center_x': .2, 'center_y': .5}
+            on_press: EventControl.navigationBar.on_start()
+
+    MDBoxLayout:
+        size_hint: 0.3, 1
+        orientation: 'vertical'
+        pos_hint_x: None, None
+        MDLabel:
+            text: root.header_label
+            halign: 'center'
+            valign: 'middle'
+            font_size: "22sp"
+            color: GeneralColor.text_color_global
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.4, 1
+        MDBoxLayout:
+
+
+<HeaderAddAccount>:
+    size_hint: 1, 0.1
+    MDBoxLayout:
+        size_hint: 0.2, 1
+        MDIconButton:
+            icon: 'keyboard-backspace'
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_press: EventControl.manager_instance.back_button()
+    MDBoxLayout:
+        size_hint: 1, 0.6
+        MDLabel:
+            text: root.header_label
+            halign: 'center'
+            valign: 'middle'
+            color: GeneralColor.text_color_global
+    MDBoxLayout:
+        size_hint: 0.2, 1
+
+
+<HeaderAddIcon, HeaderAddArticle, HeaderDetailArticle, HeaderAddTransfer>:
+    size_hint: 1, 0.1
+    MDBoxLayout:
+        size_hint: 0.2, 1
+        MDIconButton:
+            icon: 'keyboard-backspace'
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_press: app.manager.new_screen_transition(root.old_screen, root.old_screen_str, 'back')
+    MDBoxLayout:
+        size_hint: 1, 0.6
+        MDLabel:
+            text: root.header_label
+            halign: 'center'
+            valign: 'middle'
+            color: GeneralColor.text_color_global
+    MDBoxLayout:
+        size_hint: 0.2, 1
+
+
+<HeaderAllIcon>:
+    size_hint: 1, 0.1
+    MDBoxLayout:
+        size_hint: 0.2, 1
+        MDIconButton:
+            icon: 'keyboard-backspace'
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_press: root.root_screen.transition_back()  # TODO придумать универсальный метод
+    MDBoxLayout:
+        size_hint: 1, 0.6
+        MDLabel:
+            text: root.header_label
+            halign: 'center'
+            valign: 'middle'
+            color: GeneralColor.text_color_global
+    MDBoxLayout:
+        size_hint: 0.2, 1

@@ -1,0 +1,35 @@
+#:kivy 2.0.0
+
+#:import images_path kivymd.images_path
+#:import hex kivy.utils.get_color_from_hex
+#:import sp kivy.metrics.sp
+#:set gray_dark hex('#c2c2c2')
+#:import GeneralColor utils.dispatcher.GeneralColor
+#:import EventControl utils.dispatcher.EventControl
+#:import MainScreen screen.main_screen.main_screen.MainScreen
+
+
+<MainBoxNavigation>:
+    manager: screen_manager
+    navigation_bar: navigation_bar
+    ScreenManagement:
+        id: screen_manager
+    NavigationBar:
+        content_drawer: content_drawer
+        id: navigation_bar
+        ContentNavigationDrawer:
+            id : content_drawer
+            navigation_bar: navigation_bar
+
+
+<ContentPopup>:
+    orientation: "vertical"
+    spacing: -40
+    MDSpinner:
+        size_hint: None, None
+        size: dp(46), dp(46)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        active: True
+    #MDLabel:
+        #text: "loading..."
+        #pos_hint: {'center_x': .9}

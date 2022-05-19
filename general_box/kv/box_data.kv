@@ -1,0 +1,57 @@
+#:kivy 2.0.0
+
+<BoxForDataDetail>:
+    rows: 2
+    padding: 0, 10
+    pos_hint: {'center_x': 0.5}
+    #max_width: 80
+    adaptive_height: True
+    on_release: self.pick_data()
+    canvas.before:
+        Color:
+            rgba: self.canvas_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [(10.0, 10.0), (10.0, 10.0), (10.0, 10.0), (10.0, 10.0)]
+
+    MDLabel:
+        adaptive_height: True
+
+        id: text_date
+        color: GeneralColor.text_color_global
+        halign: "center"
+        valign: 'middle'
+        font_size: '14sp' 
+
+    MDLabel:
+        adaptive_height: True
+        id: text_date_name
+        color: GeneralColor.text_color_global
+        halign: "center"
+        valign: 'middle'
+        font_size: '12sp' 
+
+
+<BoxPicker>:
+    rows: 2
+    padding: 0, 10
+    pos_hint: {'center_x': 0.5}
+    max_width: 80
+    on_release: root.show_date_picker()
+    canvas.before:
+        Color:
+            rgba: GeneralColor.header_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [(10.0, 10.0), (10.0, 10.0), (10.0, 10.0), (10.0, 10.0)]
+
+    MDLabel:
+        murkup: True
+        text: 'Выберите\nдату'
+        color: GeneralColor.text_color_global
+        halign: "center"
+        valign: 'middle'
+        font_size: '12sp'               # TODO ТЕКСТ под иконками
+        rows: 2

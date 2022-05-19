@@ -1,0 +1,176 @@
+#:kivy 2.0.0
+
+<AddArticleScreen>:
+    scroll_box: scroll_box
+    MDBoxLayout:
+        id: widget_one
+        orientation: 'vertical'
+        size_hint: (None, None)
+        size_hint: 1, 1
+        HeaderAddArticle:
+        CentrWidgetAll:
+            id: centr_widget
+            size_hint: 1, 0.9
+            padding: 20, 10, 0, 10
+            ScrollView:
+                id: scroll_box
+                effect_cls: 'ScrollEffect'
+                do_scroll_x: False
+                bar_color: 0,0,0,0
+                pos_hint: {"center_x": .5, "center_y": .5}
+                MDBoxLayout:
+                    id: box
+                    orientation: 'vertical'
+                    adaptive_height: True
+                    spacing: 10
+                    padding: 0, 10, 0, 0
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: 30
+                        orientation: 'horizontal'
+                        BoxForCheck:
+                            root: root
+                            id: check_costs
+                            category: 'costs'
+                        BoxForCheck:
+                            root: root
+                            id: check_income
+                            category: 'income'
+                    MDBoxLayout:
+                        adaptive_height: True
+                        orientation: 'horizontal'
+                        MDBoxLayout:
+                            adaptive_height: True
+                            adaptive_width: True
+                            BoxChoiceForAccountArticle:
+                                id: box_choice_for_account
+                                text_sign_money: text_sign_money
+                        MDBoxLayout:
+                            adaptive_height: True
+                            size_hint_x: None
+                            width: "200sp"
+                            pos_hint: {"center_x": .5, "center_y": .5}
+                            TextInputSumma:
+                                id: text_field_summa
+                                helper_text: "Заполните сумму"
+                                required: True
+                                on_focus: self.recording_summa(self, root)
+                                on_text: self.text_validate_summa(self, self.text)
+                            MDLabel:
+                                id: text_sign_money
+                                text: ''
+                                color: GeneralColor.text_color_global
+                    BoxGroupArticle:
+                        id: box_group
+                        root_screen: root
+                        adaptive_height: True
+                        spasing: 5
+                    BoxCategoryArticle:
+                        id: box_category
+                        root_screen: root
+                        rows: 2
+                        adaptive_height: True
+                    MDBoxLayout:
+                        adaptive_height: True
+                        padding: 20, 5, 30, 5
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 0, 0
+                            Rectangle:    
+                                size: self.size
+                                pos: self.pos
+                        TextInputComent:
+                            id: text_field_comment
+                            max_text_length: 100
+                            on_focus: self.recording_comment(self, root)
+                            on_text: self.text_validate_comment(self, self.text, self.max_text_length)
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        adaptive_height: True
+                        padding: 0, 10
+                        MagicLabel:
+                            id: label_text_data
+                            adaptive_height: True
+                            text: 'Выберите дату:'
+                            font_size: '15sp'
+                            padding: 20, 5
+                        BoxForDataArticle:
+                            id: box_for_data
+                            root_screen: root
+                            label_text_data: label_text_data
+                            adaptive_height: True
+                            cols: 4
+                            spacing: 5
+                            padding: 0,0,20,0
+                    MDBoxLayout:
+                        adaptive_height: True
+                        size_hint_x: None
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        padding: -10, 15, 0, 20
+                        MDFillRoundFlatButton:
+                            id: button_add_article
+                            text: 'СОХРАНИТЬ'
+                            theme_text_color: "Custom"
+                            md_bg_color: GeneralColor.header_color
+                            on_release: root.query_insert_article()        
+
+
+<BoxChoiceForAccountArticle>:
+    adaptive_height: True
+    adaptive_width: True
+    orientation: 'vertical'
+    padding: [ 10, 0, 5, 10]
+    on_press: self.show_dialog_choice_account()
+    MDBoxLayout:
+        adaptive_height: True
+        MDLabel:
+            padding: 15, 0
+            text: 'Счет:'
+            font_size: '15sp'
+            size_hint_y: None
+            height: 30
+            color: GeneralColor.text_color_global
+        MDIcon:
+            id: icon_account
+            halign: "center"
+            icon:  'chevron-down' 
+            theme_text_color: "Custom"
+            text_color: GeneralColor.black
+    MDGridLayout:
+        cols: 2
+        adaptive_height: True
+        adaptive_width: True
+        spacing: 20
+        MDIcon:
+            id: icon_account
+            halign: "center"
+            icon:  '' 
+            theme_text_color: "Custom"
+            text_color: GeneralColor.black
+        MagicLabel:
+            id: label_text_account
+            size_hint_y: None
+            height: 30
+            size_hint_x: None
+            width: 120
+            text: 'выберите счет'
+            font_size: '12sp'
+            valign: 'center'
+            text_size: self.size
+            max_lines: 1
+            shorten: True
+            shorten_from: 'right'
+
+
+<MagicLabel@MagicBehavior+MDLabel>:
+    theme_text_color: "Custom"
+    text_color:  GeneralColor.text_color_global 
+
+
+<WindowChoiceAccount>:
+    adaptive_height: True
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    size_hint_x: 0.9
+    title: "" 
+    type: ""
+    md_bg_color: 0,0,0,0  # TODO не поддаетьсяизменениюб а так же скролл

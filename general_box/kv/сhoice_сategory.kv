@@ -1,0 +1,51 @@
+#:kivy 2.0.0
+
+<HeaderBoxChoiceCategory>:
+    spacing: 10
+    cols: 2
+    AnchorLayout:
+        anchor_x: 'center'
+        MDFlatButton:
+            id: costs
+            text: 'Расходы'
+            md_bg_color: (1, 1, 1, 0)
+            theme_text_color: "Custom"
+            on_release: root.choice_category(self, app.manager)
+            text_color: GeneralColor.black
+            canvas.before:
+                Color:
+                    rgba: GeneralColor.black               
+                RoundedRectangle:
+                    pos: (self.pos[0], self.pos[1] + 3)
+                    size: (self.size[0], 3)
+    AnchorLayout:
+        anchor_x: 'center'
+        MDFlatButton:
+            id: income
+            text: 'Доходы'
+            md_bg_color: (1, 1, 1, 0)
+            theme_text_color: "Custom"
+            on_release: root.choice_category(self, app.manager)
+            text_color: GeneralColor.white            
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,0
+                RoundedRectangle:
+                    pos: (self.pos[0], self.pos[1] + 3)
+                    size: (self.size[0], 3)
+
+
+<BoxForCheck>:
+    orientation: 'horizontal'
+    on_release: root.choice_category(check, app.manager)
+    MDCheckbox:
+        id: check
+        group: "check"
+        pos_hint: {'center_x': 0.1, 'center_y': .5}
+        ripple_alpha: 0
+        unselected_color: hex('#615656')
+    MDLabel:
+        id: label
+        valign: 'middle'
+        halign: 'left'
+        color: GeneralColor.text_color_global

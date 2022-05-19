@@ -1,0 +1,173 @@
+#:kivy 2.0.0
+
+<BoxCategoryArticle>:
+    id: box_category
+    orientation: 'vertical'
+    adaptive_height: True
+    padding: 0, 0, 0, 0
+    size_hint_x : None
+    size_hint_x: 0.95
+    MagicLabel:
+        id: label_text_icon
+        adaptive_height: True
+        text: 'Выберите категорию:'
+        font_size: '15sp'
+        padding: 20, 0
+    BoxIconCarouselArticle:
+        id: box_icon_carousel
+        root_box: box_category
+        size_hint_y: None
+        padding: 0,0,0,0
+    BoxIndex:
+        id: box_index
+        box_icon_carousel: box_icon_carousel
+        size_hint: 0.5, 0.2
+        orientation: 'horizontal'
+        pos_hint:{"center_x": 0.5,"center_y": -1}
+        padding: 0, 0, 0, 0
+
+
+<ButtonPlusArticle>:
+    pos_hint : {'x': 0.8, 'y': 0.9}
+    MDIconButton:
+        icon : 'plus-thick'
+        pos_hint : {'y': 0.9}
+        user_font_size: '25sp'
+        theme_text_color: "Custom"
+        text_color: GeneralColor.white
+        md_bg_color: GeneralColor.header_color
+        on_release: EventControl.add_article_screen.add_widget_icon_all(header_name='category') # EventControl.manager_instance.new_screen_transition( EventControl.icon_all_screen, "IconAllScreen", 'default' )
+
+
+<BoxForIconArticleCategory>:
+    id: box_for_icon_article
+    adaptive_height: True
+    orientation: 'lr-tb'
+    spacing: 0
+    canvas.before:
+        Color:
+            rgba: GeneralColor.dark_grey               
+        RoundedRectangle:
+            pos: (self.pos[0] + 30, self.pos[1] - 10)
+            size: (self.size[0] - 80, 1)
+
+
+<BoxForIconDetailArticleCategory>:
+    adaptive_height: True
+    adaptive_width: True
+    rows: 2
+    spacing: 5
+    padding: 0, 0, 0, 0
+    canvas.after:
+        Color:
+            rgba: root.color_canvas_after
+        Rectangle:    
+            size: self.size
+            pos: self.pos
+    IconButtonDetailArticle:
+        id: icon_button
+        icon: ''    # root.icon_button
+        user_font_size: '25sp'
+        theme_text_color: "Custom"
+        text_color: GeneralColor.white
+        md_bg_color: GeneralColor.grey
+        on_press: root.category_selection(self)
+    MDLabel:
+        id: label
+        #text: root.text_label
+        halign: "center"
+        font_size: '10sp'               
+        text_size: self.size
+        max_lines: 1
+        shorten: True
+        shorten_from: 'right'
+        color: GeneralColor.text_color_global
+
+
+<BoxGroupArticle>:
+    id: box_group
+    adaptive_height: True
+    padding: 0, 0, 0, 20
+    spasing: 10
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: 1, 0, 0, 0
+        Rectangle:    
+            size: self.size
+            pos: self.pos
+    MDBoxLayout:
+        spasing: 10
+        adaptive_height: True
+        padding: 10, 0, 10, 10
+        MDCheckbox:
+            id: check_group
+            group: 'group'
+            size_hint: None, None
+            size: dp(24), dp(24)
+            pos_hint: {'center_x': 0.1, 'center_y': .5}
+            ripple_alpha: 0
+            unselected_color: hex('#615656')
+            on_active: root.on_checkbox_active(*args)
+        ButtonAddGroup:
+            padding: 10, 0
+            MagicLabel:
+                id: label_text_icon
+                valign: 'middle'
+                halign: 'left'
+                text: 'Добавить в группу'
+                font_size: '15sp'
+                text_color:  GeneralColor.dark_grey
+            MDIcon:
+                id: icon_chevron_group
+                icon: 'chevron-right'
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: GeneralColor.dark_grey
+                # md_bg_color: 1,0,1,1
+    BoxIconCarouselGroup:
+        id: box_icon_carousel
+        root_box: box_group
+        size_hint_y: None
+        height: 0
+    BoxIndex:
+        id: box_index
+        box_icon_carousel: box_icon_carousel
+        size_hint: 0.5, 0.2
+        orientation: 'horizontal'
+        pos_hint:{"center_x": 0.5,"center_y": -1}
+        padding: 0, 0, 0, 0
+
+
+<BoxForIconArticleGroup>:
+    id: box_for_icon_article
+    adaptive_height: True
+    orientation: 'lr-tb'
+    spacing: 0
+    canvas.before:
+        Color:
+            rgba: GeneralColor.dark_grey               
+        RoundedRectangle:
+            pos: (self.pos[0] + 30, self.pos[1] - 10)
+            size: (self.size[0] - 80, 1)
+
+
+<IconButtonDetailArticle@MDIconButton+MDTooltip>:
+    id: icon_button
+    icon: ''    # root.icon_button
+    user_font_size: '25sp'
+    theme_text_color: "Custom"
+    text_color: GeneralColor.white
+    md_bg_color: GeneralColor.grey
+
+
+<ButtonPlusGroup>:
+    pos_hint : {'x': 0.8, 'y': 0.9}
+    MDIconButton:
+        icon : 'plus-thick'
+        pos_hint : {'y': 0.9}
+        user_font_size: '25sp'
+        theme_text_color: "Custom"
+        text_color: GeneralColor.white
+        md_bg_color: GeneralColor.header_color
+        on_release: EventControl.add_article_screen.add_widget_icon_all(header_name='group')

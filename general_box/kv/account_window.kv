@@ -1,0 +1,24 @@
+#:kivy 2.0.0
+
+<ItemConfirm>:
+    ripple_scale: 0.7
+    ripple_duration_in_fast: 0.4
+    ripple_duration_out: 1
+    on_release: root.press_choice_account()              
+
+    IconLeftWidget:
+        id: icon
+        icon: ''
+        ripple_alpha: 0
+        theme_text_color: "Custom"
+        user_font_size: '23sp'
+        text_color: 1,1,1,1         # TODO ТЕМНО СЕРЫЙ ПО УМОЛЧАНИЮ
+        md_bg_color: 1,1,1,1  
+        on_release: root.press_choice_account()              
+
+
+<Check>:
+    id: check_account
+    group: "check_account"
+    pos_hint: {'center_x': 0.9, 'center_y': .5}
+    ripple_alpha: 0

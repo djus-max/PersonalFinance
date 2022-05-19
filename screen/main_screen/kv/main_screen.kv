@@ -1,0 +1,188 @@
+#:kivy 2.0.0
+
+<MainScreen>:
+    name: 'MainScreen'
+    id: MainScreen
+    centr_widget: centr_widget
+    down_widget: down_widget
+    circle_progress_bar: circle_progress_bar
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: (None, None)
+        size_hint: 1, 1
+        HeaderMain:
+        CentrWidgetMain:
+            id: centr_widget
+            orientation: 'horizontal'
+            size_hint: (None, None)
+            size_hint: 1, 0.5
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: 10, 10, 10, 0
+                BoxDate:
+                    id: box_date
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: 60
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    padding: 30, 0, 60, 20
+                    LineProgressBar:
+                        id: line_progress
+                MDBoxLayout:
+                    id: box_for_bar
+                    orientation: 'vertical'
+                    CircularProgressBar:
+                        id: circle_progress_bar
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                MDBoxLayout:
+                    MDBoxLayout:
+                    AnchorLayout:
+                        id: box_for_button
+                        size_hint: None, None
+                        size: 60, 60
+                        anchor_x: 'right'
+                        anchor_y: 'bottom'
+                        padding: [ 0, 0, 5, 5]
+                        ButtonPlusHight:
+        DownBox:
+            root: root
+            id: down_widget
+            orientation: 'vertical'
+            size_hint: 1, 0.3
+            padding: 5
+            ScrollView:
+                id: scroll_box 
+                # effect_cls: 'ScrollEffect'         
+                root_layout: MainScreen
+                ArticleBox:
+                    id: article_box
+                    adaptive_height: True
+                    spacing: 5
+                    padding: 2, 0, 2, 0
+                    orientation: 'vertical'
+
+
+<BoxDate>:
+    label_text_date: label_text_date
+    orientation: 'vertical'
+    size_hint_y: None
+    height: 60
+    BoxForDate:
+        id: box_date
+        orientation: 'horizontal'
+        size_hint: 1, 0.2
+        size_hint_y: None
+        height: 30
+    MDBoxLayout:
+        size_hint_y: None
+        height: 30
+        canvas.before:
+            Color:
+                rgba: 1, 0, 0, .5
+            Rectangle:    
+                size: self.size
+                pos: self.pos
+        BoxArrow:
+            id: left
+            size_hint_x: None
+            width: 50
+            padding: 10, 5, 0, 0
+            on_release: root.change_arrow(self)
+            ripple_scale: 1
+            IconArrow:
+                icon: 'arrow-left'
+        AnchorLayout:
+            orientation: 'horizontal'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            MDLabel:
+                id: label_text_date
+                text: ''
+                font_size: '15sp'
+                halign: "center"
+                valign: 'middle'
+                theme_text_color: "Custom"
+                text_color: GeneralColor.black
+        BoxArrow:
+            id: right
+            size_hint_x: None
+            width: 50
+            padding: 0, 5, 10, 0
+            on_release: root.change_arrow(self)
+            IconArrow:
+                icon: 'arrow-right'
+                halign: 'right'
+
+
+<IconArrow@MDIcon>:
+    icon: 'arrow-left'
+    text_color: GeneralColor.dark_grey
+    theme_text_color: "Custom"
+    md_bg_color: GeneralColor.white
+    valign: 'middle'
+
+
+<CentrWidget>:
+    elevation: 36
+
+
+<CentrWidgetAll@CentrWidget>:
+    canvas.before:
+        Color:
+            rgba: root.color_canvas
+        RoundedRectangle:
+            pos: (self.pos[0] + 10, self.pos[1])
+            size: (self.size[0] - 20, self.size[1])
+            radius: [(30.0, 30.0), (30.0, 30.0), (0.0, 0.0), (0.0, 0.0)]
+
+
+<CentrWidgetTranfer@CentrWidget>:
+    canvas.before:
+        Color:
+            rgba: (GeneralColor.white) 
+        RoundedRectangle:
+            pos: (self.pos[0] + 10, self.pos[1])
+            size: (self.size[0] - 20, self.size[1])
+            radius: [(30.0, 30.0), (30.0, 30.0), (0.0, 0.0), (0.0, 0.0)]
+
+
+<CentrWidgetMain@CentrWidget>:
+    canvas.before:
+        Color:
+            rgba: (GeneralColor.white) 
+        RoundedRectangle:
+            pos: (self.pos[0] + 10, self.pos[1])
+            size: (self.size[0] - 20, self.size[1])
+            radius: [(30.0, 30.0), (30.0, 30.0), (30.0, 30.0), (30.0, 30.0)]
+
+
+<ButtonPlus>:
+    id: button_add_article
+    icon: "plus-thick"
+    theme_text_color: "Custom"
+    md_bg_color: GeneralColor.header_color
+    text_color: GeneralColor.white
+    on_release: app.manager.new_screen_transition( EventControl.add_article_screen, 'AddArticleScreen', 'default' )
+
+
+<ButtonPlusHight>:
+    user_font_size: "25sp"
+
+
+<ButtonPlusLite>:
+    user_font_size: "15sp"
+
+
+<BoxDateDetail>:
+    root_screen: MainScreen
+    on_release: self.choice_date(self)
+    MDLabel:
+        id: text_date
+        text: ''
+        font_size: '13sp'
+        halign: "center"
+        valign: 'middle'
+        theme_text_color: "Custom"
+        text_color: GeneralColor.dark_grey
+        markup: True
